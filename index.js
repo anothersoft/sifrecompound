@@ -40,43 +40,47 @@ const registry = new Registry([...defaultRegistryTypes]);
 	console.log("Coded with <3 by @angrymouse_hns, founder of Another.Software");
 	recompound.forEach((comp) => {
 		setInterval(async () => {
-			let rewards = await getRewardsFor(firstAccount.address, comp.validator);
+			try {
+				let rewards = await getRewardsFor(firstAccount.address, comp.validator);
 
-			if (uRowanToRowan(rewards) >= comp.minAmount) {
-				let tx = await client.signAndBroadcast(
-					firstAccount.address,
-					[
-						{
-							typeUrl:
-								"/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward",
+				if (uRowanToRowan(rewards) >= comp.minAmount) {
+					let tx = await client.signAndBroadcast(
+						firstAccount.address,
+						[
+							{
+								typeUrl:
+									"/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward",
 
-							value: {
-								delegatorAddress: firstAccount.address,
-								validatorAddress: comp.validator,
+								value: {
+									delegatorAddress: firstAccount.address,
+									validatorAddress: comp.validator,
+								},
 							},
-						},
-						{
-							typeUrl: "/cosmos.staking.v1beta1.MsgDelegate",
+							{
+								typeUrl: "/cosmos.staking.v1beta1.MsgDelegate",
 
-							amount: {
-								denom: "rowan",
-								amount: rewards.toString(),
-							},
-							value: {
-								delegatorAddress: firstAccount.address,
-								validatorAddress: comp.validator,
 								amount: {
 									denom: "rowan",
 									amount: rewards.toString(),
 								},
+								value: {
+									delegatorAddress: firstAccount.address,
+									validatorAddress: comp.validator,
+									amount: {
+										denom: "rowan",
+										amount: rewards.toString(),
+									},
+								},
 							},
-						},
-					],
-					fee,
-					"SifReCompound rewards recompound. Stake now with Another.Software!\n https://another.software/sifrecompound"
-				);
+						],
+						fee,
+						"SifReCompound rewards recompound. Stake now with Another.Software!\n https://another.software/sifrecompound"
+					);
 
-				console.log("Successfully restaked! TX id:" + tx.transactionHash);
+					console.log("Successfully restaked! TX id:" + tx.transactionHash);
+				}
+			} catch (e) {
+				return;
 			}
 		}, comp.interval);
 	});
