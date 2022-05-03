@@ -59,16 +59,15 @@ const registry = new Registry([...defaultRegistryTypes]);
 							{
 								typeUrl: "/cosmos.staking.v1beta1.MsgDelegate",
 
-								amount: {
-									denom: "rowan",
-									amount: rewards.toString(),
-								},
 								value: {
 									delegatorAddress: firstAccount.address,
 									validatorAddress: comp.validator,
 									amount: {
 										denom: "rowan",
-										amount: rewards.toString(),
+										amount: (
+											(rewards / 100n) *
+											BigInt(comp.delegatePercents)
+										).toString(),
 									},
 								},
 							},
