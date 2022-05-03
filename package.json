@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "https://github.com/angrymouse/cosmopound",
   "author": "Another.Software (team@another.software)",
-  "license": "CCBY",
+  "license": "AnotherSoftwareAttributionLicense",
   "private": false,
   "dependencies": {
     "@cosmjs/proto-signing": "^0.28.4",
