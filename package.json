@@ -1,0 +1,15 @@
+{
+  "name": "cosmopound",
+  "version": "1.0.0",
+  "description": "Autocompound your staking on cosmos based chains",
+  "main": "index.js",
+  "repository": "https://github.com/angrymouse/cosmopound",
+  "author": "Another.Software (team@another.software)",
+  "license": "CCBY",
+  "private": false,
+  "dependencies": {
+    "@cosmjs/proto-signing": "^0.28.4",
+    "@cosmjs/stargate": "^0.28.4",
+    "undici": "^5.1.1"
+  }
+}
