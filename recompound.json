@@ -3,6 +3,7 @@
     {
         "validator": "sifvaloper1sz4vscgjuqqntt2pjs65u96mhy5tu5qw958nxt",
         "minAmount": 10,
-        "interval": 100000
+        "interval": 100000,
+        "delegatePercents": 100
     }
 ]
